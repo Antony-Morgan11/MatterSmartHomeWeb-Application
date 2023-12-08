@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class = "login">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Login Page</title>
+</head>
+<body style="background-color:cornflowerblue">
+    <center>
+        <br>
+        <br>
+    <div style="width: 500px; height: 800px; padding: 100px; background-color:white; border: groove;">
+        <center><h2 style="font-family:'Verdana';">LOGIN</h2></center>
+        <br>
+       
+        <form action="/login" method="POST">
+            <label for="username">Username: &nbsp;</label>
+            <input type="text" id="username"name="username" class="large-input" required style="width: 200px; border: groove;">
+            <br>
+            <br>
+            <label for="password">Password: &nbsp;</label>
+            <input type="password" id="password" name="password" class="large-input" required style="width: 200px; border: groove;">
+            
+            <br>
+            <br>
+            <center><button type="submit" class="button">Login</button></center>
+        </form>
+        <p id="message"></p>
+        <br>
+        <center><a href="/" class="back-button">Back to Welcome Page</a></center>
+        
+
+    </div>
+</center>
+</body>
+</div>
+</html>

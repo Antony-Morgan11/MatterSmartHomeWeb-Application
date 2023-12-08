@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Pair your device</title>
+</head>
+
+<body style="background-color:lightsteelblue;">
+    <nav>
+        <div class="container nav__container">
+            <u1 class="nav__items">
+                <!-- home page -->
+                <li><a href="/home">Home</a></li>
+
+
+
+            </u1>
+
+            <a href="/" class="nav__logo">
+                <h3>smartHome</h3>
+            </a>
+
+            <div class="nav__signin-signup">
+                <a href="pairdevice"> Pair Device</a>
+                <a href="viewdevices"> View Devices</a>
+                <a href="settings"> Settings</a>
+                <a href="logout"> Logout</a>
+
+
+            </div>
+        </div>
+    </nav>
+
+
+    <br>
+    <br>
+    <br>
+
+    <div class="container">
+        <center>
+            <h2 style="font-family: 'Cochin'; color: black;">Pair Your Device Below</h2>
+            <br>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li class="{{ message[1] }}">{{ message[0] }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            <form action="" method="POST" novalidate>
+                {{form.hidden_tag()}}
+
+                <p>{{form.deviceID.label}}<br>{{form.deviceID()}}</p>
+                <p>{{form.deviceType.label}}<br>{{form.deviceType()}}</p>
+                <p>{{form.deviceName.label}}<br>{{form.deviceName()}}</p>
+
+                <div class="pair-device-button">{{form.submit()}}</div>
+            </form>
+            <br>
+            <a href="/" class="back-button">Back to Welcome Page</a>
+        </center>
+
+    </div>
+</body>
+
+</html>

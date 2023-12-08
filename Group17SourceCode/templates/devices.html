@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>195 Project Web</title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+
+    <!-- ICONSCOUT CDN-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <!--STYLESHEET-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+    <nav>
+        <div class="container nav__container">
+            <u1 class="nav__items">
+                <!-- home page -->
+                <li><a href="/home">Home</a></li>
+
+
+            </u1>
+
+            <a href="/" class="nav__logo">
+                <h3>smartHome</h3>
+            </a>
+
+            <div class="nav__signin-signup">
+                <a href="pairdevice"> Pair Device</a>
+                <a href="viewdevices"> View Devices</a>
+                <a href="logout"> Logout</a>
+
+
+            </div>
+        </div>
+    </nav>
+
+
+
+    <br>
+    <br>
+    <br>
+    <h2 style="color: black;">Added Devices</h2>
+    <br>
+
+
+    </div>
+
+    <p>Clear Cache:
+    <form action="{{ url_for('Clear') }}" method="post" style="display: inline;">
+        <button type="submit">Clear</button>
+    </form>
+    <br></p>
+    {% for device in devices %}
+    <center>
+        <div style="display:table-row; border-width:5px; border-style: solid;">
+            <div
+                style="width: 1500px; display: table; background-color:rgb(218, 252, 242); text-align: left; padding-left:30px; padding-bottom: 80px; border-width: 5px; border-style: dashed;">
+
+                <span style="display:-webkit-flex;">
+                    <h3><br>Device ID:&nbsp;</h3>
+                    <h3 style="color:lightseagreen;"> <br> {{device.id}} </h3>
+                </span>
+                <span style="display:-webkit-flex;">
+                    <h3><br>Device Name:&nbsp;</h3>
+                    <h3 style="color:rgb(178, 134, 32);"> <br> {{device.devName}} </h3>
+                </span>
+                <span style="display:-webkit-flex;">
+                    <h3><br>Device Type:&nbsp;</h3>
+                    <h3 style="color:rgb(32, 34, 178);"> <br> {{device.devType}} </h3>
+                </span>
+                <span style="display:-webkit-flex;">
+                    <h3><br>Status:&nbsp;</h3>
+                    <h3 id="status_{{device.id}}"
+                        style="color:{{'rgb(21, 213, 50)' if device.devStatus else 'rgb(255, 69, 0)' }};"> <br>
+                        {{'On' if device.devStatus else 'Off'}} </h3>
+                </span>
+
+                <!-- Toggle Button -->
+                {% if device.devType == "MatterLight" %}
+                <p><br><br>Switch:
+
+                    <button onclick="toggleDevice({{device.id}})" class="turn-on-button">Toggle</button>
+
+                    <br><br>
+                </p>
+                <p>
+
+                    <input type="range" id="brightnessRange_{{device.id}}" name="brightness" min="0" max="254"
+                        value="{{device.devLevel}}" onchange="changeLevelControl(this.value,{{device.id}});">
+                <p id="rangeValue_{{device.id}}">{{device.devLevel}}</p>
+
+                <br></p>
+                {% endif %}
+                {% if device.devType == "MatterSwitch" %}
+                {% if device.devBound %}
+                <p>
+                    <br>
+                    <br>
+                    Switch:
+                    <button onclick="DeviceOn({{device.id}})" class="turn-on-button">Turn On</button>
+
+
+                    <!-- <button onclick="DeviceOn({{device.id}})">Turn On</button> -->
+
+                    <br>
+                    <br>
+                </p>
+                <p>Switch:
+                    <!-- <button onclick="DeviceOff({{device.id}})">Turn Off</button> -->
+                    <button onclick="DeviceOff({{device.id}})" class="turn-off-button">Turn Off</button>
+                    <br>
+                </p>
+                {% else %}
+                <p>Bind:
+
+                <form action="{{ url_for('Bind_device', device_id=device.id) }}" method="post" style="display: inline;">
+                    <button type="submit">Bind</button>
+                </form>
+                <br></p>
+                {% endif %}
+                {% endif %}
+
+                <br>
+
+                <form action="" method="POST" novalidate>
+                    <div>
+                        {{device.devRemoveDevButton.hidden_tag()}}
+                        {{device.devRemoveDevButton.submit()}}
+                    </div>
+                </form>
+
+
+                <div style="display: table-cell; text-align: right; padding-right: 40px;">
+                    <br>
+                    <center>
+
+                        <img src="{{ url_for('static', filename='images/bulb.png') }}" alt="Dev Image" width=10px
+                            height=200px>
+                    </center>
+                </div>
+            </div>
+
+
+            <div>
+                <br>
+    </center>
+
+    </div>
+    </div>
+    {% endfor %}
+
+    </div>
+    <!-- <script>
+        
+        function UpdateLevelControl(value) {
+            var form = document.getElementById("BrightnessControlForm").submit();
+        }
+    </script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+        var socket = io.connect('/')
+        socket.on('connect', function () {
+            console.log('Socket Connected!!!!');
+        });
+
+
+        function changeLevelControl(brightness, deviceId) {
+            socket.emit('changeLevel', { device_id: deviceId, brightness: brightness });
+        }
+
+        function toggleDevice(deviceId) {
+            socket.emit('toggleState', { device_id: deviceId });
+        }
+
+        function DeviceOn(deviceId) {
+            socket.emit('StateOn', { device_id: deviceId })
+        }
+
+        function DeviceOff(deviceId) {
+            socket.emit('StateOff', { device_id: deviceId })
+        }
+
+        socket.on('Updated_Level', function (data) {
+            var brightnessVar = document.getElementById('brightnessRange_' + data.device_id);
+            var rangeVar = document.getElementById('rangeValue_' + data.device_id);
+            if (brightnessVar && rangeVar) {
+                brightnessVar.value = data.brightness;
+                rangeVar.textContent = data.brightness;
+            }
+        })
+
+        socket.on('Updated_Status', function (data) {
+            var statusVar = document.getElementById('status_' + data.device_id);
+            if (statusVar) {
+                statusVar.textContent = data.device_status ? 'On' : 'Off';
+                statusVar.style.color = data.device_status ? 'rgb(21, 213, 50)' : 'rgb(255, 69, 0)';
+            }
+        })
+
+
+    </script>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+
+</html>

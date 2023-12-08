@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <br>
+</head>
+
+<body style="background-color:white">
+    <center>
+        <div style="width: 500px; height: 800px; padding: 100px; background-color:lightgreen; border: groove;">
+            <center>
+                <h1 style="font-family:'Cambria'">Signup</h1>
+            </center>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li class="{{ message[1] }}">{{ message[0] }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            <form action="" method="POST" novalidate>
+                {{form.hidden_tag()}}
+                <br>
+
+
+                <p>Username <br> {{form.username()}}</p>
+                <p>Email <br> {{form.email()}}</p>
+                <p>Password <br> {{form.password()}}</p>
+                <p>Retype password <br> {{form.password()}}</p>
+
+                <p class="submit-button">{{form.submit()}}</p>
+
+            </form>
+            <a href="/" class="back-button">Back to Welcome Page</a>
+
+
+        </div>
+    </center>
+</body>
+
+</html>

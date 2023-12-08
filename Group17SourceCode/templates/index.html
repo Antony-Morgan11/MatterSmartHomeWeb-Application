@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>195 Project Web</title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+
+    <!-- ICONSCOUT CDN-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <!--STYLESHEET-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+    <nav>
+        <div class="container nav__container">
+            <u1 class="nav__items">
+                <!-- home page -->
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#functions">Functions</a></li>
+                <li><a href="/#tools">Tools</a></li>
+            </u1>
+
+            <a href="/" class="nav__logo">
+                <h3>smartHome</h3>
+            </a>
+
+            <div class="nav__signin-signup">
+
+                <a href="login"> Login</a>
+                <a href="signup" class="btn">Signup</a>
+
+            </div>
+        </div>
+    </nav>
+    <!-- END OF NAVBAR-->
+
+    <header>
+        <div class="container header__container">
+            <h1 class="header__title">Smart Home<br />Application</h1>
+            <p class="lead">CMPE-195 Group 17 Project</p>
+
+            <div class="header__image">
+                <img src="{{ url_for('static', filename='images/home.jpg') }}" alt="Home Image">
+            </div>
+
+            <div class="cta">
+                <!-- target to download the report-->
+                <a href="static/Report.pdf" download="Report">Want to read the whole report? Click to download the
+                    Report PDF</a>
+            </div>
+        </div>
+    </header>
+    <!-- END OF HEADER-->
+
+    <section id="about">
+        <h1 class="about__title">About</h1>
+        <div class="container">
+
+            <article class="about__article">
+                <div class="about__content">
+                    <h2 class="about__article-title">Architecture</h2>
+                    <ul class="about__article-list">
+                        <p>
+                            &#x2022; The diagram below describes the underlying architecture behind our project
+                            The devices and services we will use for this project are Javascript for frontend,
+                            Flask, and SQLAlchemy for backend and database, Raspberry Pi (as the bridge/gateway
+                            to the Matter network), and lastly, nRF5340 DK Nordic board.
+                        </p>
+                        <p>
+                            &#x2022; The computer on the far left of the diagram represents our web application and is
+                            the first
+                            layer of our project. As described earlier, this is the layer where the client can
+                            manipulate
+                            their Matter light bulb and switch.
+                        </p>
+                        <p>
+                            &#x2022; We will set up a Flask server on the backend to process requests to the matter
+                            devices as it will
+                            also authenticate users and authorize sessions. When the flask server receives requests
+                            destined for
+                            the matter device, it will forward those requests to a matter controller “Linux CHIP-Tool”;
+                            which handles
+                            the matter thread network.
+                        </p>
+                        <p>
+                            &#x2022; Our Raspberry Pi will act as the “Bridge/Gateway” to communicate with the matter
+                            network. A bridge device is a device that connects
+                            two different networks with each other; in this case, it allows our Wi-Fi network to
+                            communicate with our thread network. A bridge
+                            device is necessary in our case because our end device (the nRF5340 DK) communicates over
+                            Open Thread 1.3 protocol and cannot communicate
+                            over Wi-Fi. To solve this, we will use a Raspberry Pi as the OTBR (Open Thread Border
+                            Router), which can support both wifi and open-thread
+                            protocols and acts as a bridge between both.
+                        </p>
+                        <p>
+                            &#x2022; In the last part of the diagram, there are two end devices connected to the
+                            Raspberry Pi. For our project, we will use two nRF5340 DK boards,
+                            which will resemble our matter light bulb and matter switch devices. These end devices will
+                            help us showcase the use of the matter protocol and
+                            its advantages.
+                        </p>
+                    </ul>
+                </div>
+                <div class="about__image">
+                    <img src="{{ url_for('static', filename='images/architecture.png') }}" alt="Architecture Image">
+                </div>
+            </article>
+
+            <article class="about__article">
+                <div class="about__content">
+                    <h2 class="about__article-title">Matter Devices</h2>
+                    <ul class="about__article-list">
+                        <p>
+                            The diagram below shows a closer look at the Matter devices running on the Thread Network.
+                            We can see in addition to being connected to the Border Router, the matter devices are also
+                            connected to each other;
+                            creating a mesh network. What this means is that devices can communicate with one another on
+                            the network
+                            For instance, if a Matter-enabled light bulb and switch are on the same matter fabric and
+                            bound together,
+                            then we can manipulate the light bulb by toggling the switch. Essentially it allows us to
+                            indirectly interact with the devices we want;
+                            by using other devices.
+                        </p>
+                </div>
+                <div class="about__image">
+                    <img src="{{ url_for('static', filename='images/detailedArchitecture.png') }}"
+                        alt="Detailed Architecture Image">
+                </div>
+            </article>
+        </div>
+
+    </section>
+    <!-- END OF ABOUT-->
+
+    <section id="functions">
+        <h1 class="Functions">Functions</h1>
+        <div class="container functions__container">
+
+            <article class="functions">
+                <span class="functions__icon"><i class="uil uil-plus-circle"></i></span>
+                <div class="functions__question-answer">
+                    <h4 class="functions__question">
+                        Create an account and log in of the application website
+                    </h4>
+                    <p class="functions__answer">
+                        User can click on the signup button on top right to signup or log in
+                    </p>
+                </div>
+            </article>
+
+            <article class="functions">
+                <span class="functions__icon"><i class="uil uil-plus-circle"></i></span>
+                <div class="functions__question-answer">
+                    <h4 class="functions__question">
+                        Log out of the application on web browser
+                    </h4>
+                    <p class="functions__answer">
+                        User can click the logout button on the top right of the home page after they're signed in
+                    </p>
+                </div>
+            </article>
+
+            <article class="functions">
+                <span class="functions__icon"><i class="uil uil-plus-circle"></i></span>
+                <div class="functions__question-answer">
+                    <h4 class="functions__question">
+                        Able to commission matter devices into the network
+                    </h4>
+                    <p class="functions__answer">
+                        User can click the "Pair Devices" page on the top right and provide the necessary information
+                        for commission i.e. device type and ID
+                    </p>
+                </div>
+            </article>
+
+            <article class="functions">
+                <span class="functions__icon"><i class="uil uil-plus-circle"></i></span>
+                <div class="functions__question-answer">
+                    <h4 class="functions__question">
+                        Able to toggle the state of a device
+                    </h4>
+                    <p class="functions__answer">
+                        Toggle the state of a matter lightbulb by simply pressing the toggle button in the "View
+                        Devices" page
+                    </p>
+                </div>
+            </article>
+
+            <article class="functions">
+                <span class="functions__icon"><i class="uil uil-plus-circle"></i></span>
+                <div class="functions__question-answer">
+                    <h4 class="functions__question">
+                        Able to change the brightness of the light bulb
+                    </h4>
+                    <p class="functions__answer">
+                        Change the brightness by manipulating the brightness control lever in the "View Devices" page
+                    </p>
+                </div>
+            </article>
+
+            <article class="functions">
+                <span class="functions__icon"><i class="uil uil-plus-circle"></i></span>
+                <div class="functions__question-answer">
+                    <h4 class="functions__question">
+                        Able to bind two matter devices together
+                    </h4>
+                    <p class="functions__answer">
+                        Can bind two devices by pressing on the bind button which will allow the device with the
+                        controller role to manipulate the controlee device
+                    </p>
+                </div>
+            </article>
+
+            <article class="functions">
+                <span class="functions__icon"><i class="uil uil-plus-circle"></i></span>
+                <div class="functions__question-answer">
+                    <h4 class="functions__question">
+                        Able to control toggle the state of a bound device
+                    </h4>
+                    <p class="functions__answer">
+                        Can turn on and turn off the state of the controlee device from the controller device in the
+                        "View Devices" page
+                    </p>
+                </div>
+            </article>
+
+            <article class="functions">
+                <span class="functions__icon"><i class="uil uil-plus-circle"></i></span>
+                <div class="functions__question-answer">
+                    <h4 class="functions__question">
+                        Able to toggle state by physically interacting with the board and seeing reflected change on the
+                        website
+                    </h4>
+                    <p class="functions__answer">
+                        Can toggle state of a light by physically pressing button two on the NRF5340DK board
+                    </p>
+                </div>
+            </article>
+
+            <article class="functions">
+                <span class="functions__icon"><i class="uil uil-plus-circle"></i></span>
+                <div class="functions__question-answer">
+                    <h4 class="functions__question">
+                        View statuses of connected home systems in real-time
+                    </h4>
+                    <p class="functions__answer">
+                        User can click the "View Devices" page on the top right to see currently added devices to their
+                        account
+                    </p>
+                </div>
+            </article>
+
+            <article class="functions">
+                <span class="functions__icon"><i class="uil uil-plus-circle"></i></span>
+                <div class="functions__question-answer">
+                    <h4 class="functions__question">
+                        Who made this?
+                    </h4>
+                    <p class="functions__answer">
+                        Group 17 consists of Aaron Arul, Antony Morgan, Jason Chan, Jonathan Lei, and our Project
+                        Advisor Kaikai Liu
+                    </p>
+                </div>
+            </article>
+
+        </div>
+    </section>
+    <!-- END OF Functions-->
+
+    <section id="tools">
+        <h1 class="Tools">Tools</h1>
+
+        <div class="container team__container">
+            <article class="tool">
+                <div class="tool__member">
+                    <div class="avatar">
+                        <img src="{{ url_for('static', filename='images/cloud.jpg') }}" alt="Cloud Image">
+                    </div>
+                    <div class="team__work">
+                        <p><b>nRF Connect For Desktop</b></p>
+                        <small>Multi-OS development tool to generate and debug code. Used to communicate with the nRF
+                            board. We plan on referring to the documentation from the Nordic website on how to utilize
+                            their nRF SDK</small>
+                    </div>
+                </div>
+            </article>
+
+            <article class="tool">
+                <div class="tool__member">
+                    <div class="avatar">
+                        <img src="{{ url_for('static', filename='images/flask.png') }}" alt="Flask Image">
+                    </div>
+                    <div class="team__work">
+                        <p><b>Flask</b></p>
+                        <small>Utilized for the web application backend to enable users to form accounts, connect to
+                            specific devices, and will make the web application also process requests made to the end
+                            device as well as our Database</small>
+                    </div>
+                </div>
+            </article>
+
+            <article class="tool">
+                <div class="tool__member">
+                    <div class="avatar">
+                        <img src="{{ url_for('static', filename='images/raspberry.jpg') }}" alt="Raspberry Image">
+                    </div>
+                    <div class="team__work">
+                        <p><b>Raspberry Pi’s</b></p>
+                        <small>We are taking advantage of Raspberry Pi’s simplicity and efficiency by running our Linux
+                            CHIP-Tool on one of them and the other will serve as the Open Thread Boarder Router.</small>
+                    </div>
+                </div>
+            </article>
+
+            <article class="tool">
+                <div class="tool__member">
+                    <div class="avatar">
+                        <img src="{{ url_for('static', filename='images/Nordic-1.jpg') }}" alt="Nordic Image">
+
+                    </div>
+                    <div class="team__work">
+                        <p><b>Nordic 5340DK</b></p>
+                        <small>We’re utilizing these Development Kits to emulate as a matter light bulb and light
+                            switch. We will refer to matter documentation on how to flash and properly commission these
+                            devices onto the thread network.</small>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <a href="https://r.mtdv.me/1PZHvsqOSj" class="btn btn-primary">Don't click me</a>
+
+    <!-- END OF TEAM-->
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+</body>
+
+</html>

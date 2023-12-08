@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+
+    <!-- ICONSCOUT CDN-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <!--STYLESHEET-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+    <nav>
+        <div class="container nav__container">
+            <u1 class="nav__items">
+                <!-- home page -->
+                <li><a href="/home">Home</a></li>
+
+            </u1>
+
+            <a href="/" class="nav__logo">
+                <h3>smartHome</h3>
+            </a>
+
+            <div class="nav__signin-signup">
+                <a href="pairdevice"> Pair Device</a>
+                <a href="viewdevices"> View Devices</a>
+                <a href="settings"> Settings</a>
+                <a href="logout"> Logout</a>
+
+
+            </div>
+        </div>
+    </nav>
+    <!-- END OF NAVBAR-->
+
+    {% for user in userArray %}
+    <header>
+        <center>
+            <div style="padding: 30px; display:table-row; border-width:5px; border-style: solid;">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <h2 style="text-align: left; padding-right: 300px;">Welcome {{user.Username}}!</h2>
+                <br>
+
+                <br>
+                <h4 style="text-align: left;">User Settings:</h4>
+                <br>
+                <h3 style="font-family: 'Helvetica'; text-align: left;">User ID: {{user.Username}} </h3>
+                <br>
+                <h3 style="font-family: 'Helvetica'; text-align: left;">User Email: {{user.UserEmail}} </h3>
+                <br>
+
+                <div style="display: table-cell; text-align: right; padding-right: 100px;">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <center>
+                        <img src="{{ url_for('static', filename='images/dev.png') }}" alt="Dev Image" width=10px
+                            height=200px>
+                    </center>
+                </div>
+            </div>
+        </center>
+
+        {% endfor %}
+    </header>
+</body>
+
+</html>
