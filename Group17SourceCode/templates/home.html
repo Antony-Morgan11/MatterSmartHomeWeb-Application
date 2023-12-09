@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,30 +14,33 @@
 
     <!-- ICONSCOUT CDN-->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    
+
     <!--STYLESHEET-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
+
 <body>
     <nav>
         <div class="container nav__container">
             <u1 class="nav__items">
                 <!-- home page -->
                 <li><a href="/home">Home</a></li>
-               
-               
+
+
 
             </u1>
 
-            <a href="/" class="nav__logo"><h3>smartHome</h3></a>
+            <a href="/" class="nav__logo">
+                <h3>smartHome</h3>
+            </a>
 
             <div class="nav__signin-signup">
                 <a href="pairdevice"> Pair Device</a>
                 <a href="viewdevices"> View Devices</a>
                 <a href="settings"> Settings</a>
                 <a href="logout"> Logout</a>
-                
+
 
             </div>
         </div>
@@ -45,9 +49,9 @@
 
     <header>
         <div class="container header__container">
-            <h1 class="header__title">Smart Home<br/>Application</h1>
+            <h1 class="header__title">Smart Home<br />Application</h1>
             <p class="lead">CMPE-195 Group 17 Project</p>
-            
+
             <div class="header__image">
                 <!--<img src="./images/home.jpg">-->
                 <img src="{{ url_for('static', filename='images/home.jpg') }}" alt="Cat Image">
@@ -79,20 +83,11 @@
             </div>
 
             <div class="header__socials">
-                <a href="https://github.com/JonathanL159/CMPE195-Project-Fall-2023.git" target="_blank"><i class="uil uil-github"></i></a>
+                <a href="https://github.com/JonathanL159/CMPE195-Project-Fall-2023.git" target="_blank"><i
+                        class="uil uil-github"></i></a>
             </div>
         </div>
-<!----
-        <div class="header__decorator-1">
-            <img src="./images/pic01.jpg">
-        </div>
-        <div class="header__decorator-2">
-            <img src="./images/pic02.jpg">
-        </div>
-        <div class="header__decorator-3">
-            <img src="./images/pic03.jpg">
-        </div>
--->
+
     </header>
     <!-- END OF HEADER-->
 
@@ -120,11 +115,12 @@
                 </div>
                 <div class="about__image">
                     <!--<img src="./images/detailedArchitecture.png">-->
-                    <img src="{{ url_for('static', filename='images/detailedArchitecture.png') }}" alt="Detailed Architecture Image">
+                    <img src="{{ url_for('static', filename='images/detailedArchitecture.png') }}"
+                        alt="Detailed Architecture Image">
                 </div>
             </article>
         </div>
-    
+
     </section>
     <!-- END OF ABOUT-->
 
@@ -134,7 +130,7 @@
         <!--<h1>FAQs</h1>-->
         <div class="container faqs__container">
 
-            <article class="faq">    
+            <article class="faq">
                 <span class="faq__icon"><i class="uil uil-plus-circle"></i></span>
                 <div class="faq__question-answer">
                     <h4 class="faq__question">How does it work?</h4>
@@ -176,7 +172,7 @@
                         <!-- <img src="./images/rocket.svg"> -->
                         <img src="{{ url_for('static', filename='images/rocket.svg') }}" alt="Rocket Image">
                     </div>
-                    <div  class="team__work">
+                    <div class="team__work">
                         <p><b>Aaron Arul</b></p>
                         <small>Student</small>
                     </div>
@@ -192,7 +188,7 @@
                         <!-- <img src="./images/fish.svg"> -->
                         <img src="{{ url_for('static', filename='images/fish.svg') }}" alt="Fish Image">
                     </div>
-                    <div  class="team__work">
+                    <div class="team__work">
                         <p><b>Jason Chan</b></p>
                         <small>Student</small>
                     </div>
@@ -208,7 +204,7 @@
                         <!-- <img src="./images/thunder.svg"> -->
                         <img src="{{ url_for('static', filename='images/thunder.svg') }}" alt="Thunder Image">
                     </div>
-                    <div  class="team__work">
+                    <div class="team__work">
                         <p><b>Antony Morgan</b></p>
                         <small>Student</small>
                     </div>
@@ -226,7 +222,7 @@
                         <img src="{{ url_for('static', filename='images/bug.svg') }}" alt="Bug Image">
 
                     </div>
-                    <div  class="team__work">
+                    <div class="team__work">
                         <p><b>Jonathan Lei</b></p>
                         <small>Student</small>
                     </div>
@@ -240,4 +236,5 @@
     <script src="{{ url_for('static', filename='main.js') }}"></script>
 
 </body>
+
 </html>

@@ -21,8 +21,8 @@ import subprocess
 
 
 app = Flask(__name__)
-app.secret_key = 'splash'  # Replace with a secure secret key
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///your_database.db'  # Configure your database connection
+app.secret_key = 'splash'  
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///your_database.db' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -33,7 +33,7 @@ db = SQLAlchemy(app)
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
-login_manager.login_view = 'login'  # Specify the route for the login page
+login_manager.login_view = 'login'  
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -114,7 +114,6 @@ def devices():
         devDetails['devType'] = i.deviceType
         devDetails['devName'] = i.deviceName
         devDetails['devLevel'] = i.deviceLevel
-        # devDetails['devUser'] = i.user_id
         devDetails['devStatus'] = i.deviceStatus
         devDetails['devBound'] = i.deviceBound
 
@@ -147,13 +146,10 @@ def pairDevice():
         dev.id = current_form.deviceID.data
         dev.deviceType = current_form.deviceType.data
         dev.deviceName = current_form.deviceName.data
-        # dev.user_id = current_user.id
         dev.deviceStatus = False
         dev.deviceLevel = 127
         if (dev.deviceType == 'MatterSwitch'):
             dev.deviceBound = False
-
-        #call a process to specifically turn off the light...look in matter docs for the command
 
         command =  (
             "./chip-tool-debug pairing ble-thread "
@@ -202,9 +198,6 @@ def signup():
         user = User()
         user.username = cform.username.data
         user.email = cform.email.data
-
-        # user.password = cform.password.data
-
         user.password = bcrypt.hashpw((cform.password.data).encode('utf-8'), bcrypt.gensalt())
         print('User hashed Password is:', user.password)
         print('Adding user')
@@ -217,13 +210,6 @@ def signup():
         except Exception as e:
             db.session.rollback()
             flash('Registration failed. Check your input.', 'error')
-
-              # Redirect to the homepage
-
-        # If registration fails, show an error message
-        
-
-    # Handle the GET request (render the signup form)
     return render_template('signup.html',form=cform, error=errorMessage)
 
 @app.route('/delete_account',methods=['GET', 'POST'])
@@ -253,9 +239,7 @@ def Clear():
     
 @app.route('/bindevice/<int:device_id>', methods=['POST'])
 @login_required
-def Bind_device(device_id):
-    # device = Device.query.get_or_404(device_id)
-    
+def Bind_device(device_id):    
     light = Device.query.filter_by(deviceType="MatterLight").first()
     if light is None:
         flash('You must add a MatterLight device first', 'Failed')
